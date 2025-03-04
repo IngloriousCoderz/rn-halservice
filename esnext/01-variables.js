@@ -30,6 +30,8 @@ let arr = [];
 console.log(typeof arr, Array.isArray(arr));
 let nil = null;
 console.log(typeof nil, nil == null);
+let undef = undefined;
+console.log(typeof undef);
 let notANumber = NaN;
 console.log(typeof notANumber, Number.isNaN(notANumber));
 let infinity = Infinity;

@@ -12,6 +12,7 @@ export default [
       "no-magic-numbers": "error",
       // this rule is useful only when declaring function expressions or arrow functions
       "no-use-before-define": ["error", { functions: false }],
+      eqeqeq: ["error", "smart"],
     },
   },
 ];

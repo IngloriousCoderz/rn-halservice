@@ -62,3 +62,9 @@
   // console.log(this);
   // button.addEventListener("click", (event) => console.log(event.target, this));
 }
+
+console.log("1" == 1);
+console.log("1" === 1);
+console.log(null == null);
+console.log(null == undefined);
+console.log(undefined == undefined);
