@@ -1,0 +1,25 @@
+{
+  "name": "esnext",
+  "version": "1.0.0",
+  "description": "Sample code for a JavaScript course.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node 01-variables.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IngloriousCoderz/rn-halservice.git"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "course"
+  ],
+  "author": "Matteo Antony Mistretta <antony.mistretta@gmail.com> (https://www.ingloriouscoderz.it)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IngloriousCoderz/rn-halservice/issues"
+  },
+  "homepage": "https://github.com/IngloriousCoderz/rn-halservice#readme"
+}
