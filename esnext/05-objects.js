@@ -66,3 +66,11 @@ function sum(...operands) {
 }
 
 console.log(sum(2, 3, 4));
+
+const dog = {
+  name: "Arya",
+  age: 9,
+  bark() {
+    console.log("Woof!");
+  },
+};
