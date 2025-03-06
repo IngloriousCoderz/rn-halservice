@@ -1,10 +1,11 @@
 // import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./01-default-app/app";
+// import "./index.css";
+// import App from "./01-default-app/app";
+import App from "./02-single-file-app";
 
 createRoot(document.getElementById("root")).render(
   // <StrictMode>
-  <App />
+  <App name="Matteo Antony" />
   // </StrictMode>
 );
