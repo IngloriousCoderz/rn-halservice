@@ -2,7 +2,8 @@
 import { createRoot } from "react-dom/client";
 // import "./index.css";
 // import App from "./01-default-app/app";
-import App from "./02-single-file-app";
+// import App from "./02-single-file-app";
+import App from "./03-dynamic-app";
 
 createRoot(document.getElementById("root")).render(
   // <StrictMode>
