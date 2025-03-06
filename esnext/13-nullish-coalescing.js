@@ -1,0 +1,3 @@
+const likesIcecream = "";
+
+likesIcecream ?? likesPudding;
