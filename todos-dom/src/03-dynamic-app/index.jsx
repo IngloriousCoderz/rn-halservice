@@ -15,11 +15,9 @@ export default function App({ name = "User" }) {
         <button>Add</button>
       </form>
       <ul>
-        {tasks.map((task) => (
-          <li>
-            <span className={task.completed ? classes.completed : null}>
-              {task.text}
-            </span>
+        {tasks.map(({ id, completed, text }) => (
+          <li key={id}>
+            <span className={completed ? classes.completed : null}>{text}</span>
             &nbsp;
             <button>x</button>
           </li>
