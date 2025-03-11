@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 
-import Button from "@/app/button";
+import Button from "@/components/button";
 import { Task } from "@/types/task";
 
 interface Props {

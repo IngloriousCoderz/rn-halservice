@@ -1,8 +1,9 @@
-import { useRef, useState } from "react";
-import { FlatList, StyleSheet, Text, TextInput, View } from "react-native";
+import { useState } from "react";
 
-import Button from "./button";
-import ListItem from "./list-item";
+import Header from "./header";
+import Form from "./form";
+import List from "./list";
+
 import { Task } from "@/types/task";
 
 const INITIAL_TASKS: Task[] = [
@@ -12,24 +13,14 @@ const INITIAL_TASKS: Task[] = [
 ];
 
 export default function Index({ name = "User" }) {
-  const [text, setText] = useState("");
   const [tasks, setTasks] = useState(INITIAL_TASKS);
 
-  const textInput = useRef<TextInput>(null);
-
-  const handleChangeText = (text: string) => setText(text);
-
-  const handleAdd = () => {
+  const handleAdd = (text: string) =>
     setTasks((tasks) => {
       const maxId = tasks.length ? tasks[tasks.length - 1].id : 0;
 
       return [...tasks, { id: maxId + 1, text, completed: false }];
     });
-
-    setText("");
-
-    textInput.current?.focus();
-  };
 
   const handleToggle = (id: number) =>
     setTasks((tasks) =>
@@ -43,61 +34,11 @@ export default function Index({ name = "User" }) {
 
   return (
     <>
-      <View style={styles.header}>
-        <Text style={styles.title}>{name}'s Todo List</Text>
-      </View>
+      <Header name={name} />
 
-      <View style={styles.form}>
-        <TextInput
-          style={styles.input}
-          value={text}
-          onChangeText={handleChangeText}
-          placeholder="What next?"
-          autoFocus
-          onSubmitEditing={handleAdd}
-          submitBehavior="submit"
-          ref={textInput}
-        />
-        <Button onPress={handleAdd}>Add</Button>
-      </View>
+      <Form onAdd={handleAdd} />
 
-      <FlatList
-        data={tasks}
-        renderItem={({ item }) => (
-          <ListItem
-            task={item}
-            onToggle={handleToggle}
-            onDelete={handleDelete}
-          />
-        )}
-        keyExtractor={({ id }) => `${id}`}
-        style={styles.list}
-      />
+      <List tasks={tasks} onToggle={handleToggle} onDelete={handleDelete} />
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  title: {
-    fontWeight: "bold",
-    fontSize: 32,
-    marginTop: 8,
-  },
-  form: {
-    flexDirection: "row",
-    padding: 16,
-    gap: 16,
-  },
-  input: {
-    flex: 1,
-    borderBottomWidth: 1,
-    borderBottomColor: "grey",
-  },
-  list: {
-    paddingHorizontal: 16,
-  },
-});
