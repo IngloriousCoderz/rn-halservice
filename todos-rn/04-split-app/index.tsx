@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-import App from "./app";
+import Header from "./header";
+import Form from "./form";
+import List from "./list";
 
 import { Task } from "@/types/task";
 
@@ -31,12 +33,12 @@ export default function Index({ name = "User" }) {
     setTasks((tasks) => tasks.filter((task) => task.id !== id));
 
   return (
-    <App
-      name={name}
-      tasks={tasks}
-      onAdd={handleAdd}
-      onToggle={handleToggle}
-      onDelete={handleDelete}
-    />
+    <>
+      <Header name={name} />
+
+      <Form onAdd={handleAdd} />
+
+      <List tasks={tasks} onToggle={handleToggle} onDelete={handleDelete} />
+    </>
   );
 }

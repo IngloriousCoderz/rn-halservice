@@ -1,34 +1,38 @@
-import { RefObject } from "react";
+import { useRef, useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 
 import Button from "@/components/button";
 
 interface Props {
-  text: string;
-  onChangeText: (text: string) => void;
-  onSubmit: () => void;
-  textInput: RefObject<TextInput>;
+  onAdd: (text: string) => void;
 }
 
-export default function Form({
-  text,
-  onChangeText,
-  onSubmit,
-  textInput,
-}: Props) {
+export default function Form({ onAdd }: Props) {
+  const [text, setText] = useState("");
+
+  const textInput = useRef<TextInput>(null);
+
+  const handleChangeText = (text: string) => setText(text);
+
+  const handleSubmit = () => {
+    onAdd(text);
+    setText("");
+    textInput.current?.focus();
+  };
+
   return (
     <View style={styles.form}>
       <TextInput
         style={styles.input}
         value={text}
-        onChangeText={onChangeText}
+        onChangeText={handleChangeText}
         placeholder="What next?"
         autoFocus
-        onSubmitEditing={onSubmit}
+        onSubmitEditing={handleSubmit}
         submitBehavior="submit"
         ref={textInput}
       />
-      <Button isEnabled={!!text.length} onPress={onSubmit}>
+      <Button isEnabled={!!text.length} onPress={handleSubmit}>
         Add
       </Button>
     </View>
