@@ -8,8 +8,8 @@ interface Props {
   name: string;
   tasks: Task[];
   onAdd: (text: string) => void;
-  onToggle: (id: string) => void;
-  onDelete: (id: string) => void;
+  onToggle: (id: number) => void;
+  onDelete: (id: number) => void;
 }
 
 export default function App({ name, tasks, onAdd, onToggle, onDelete }: Props) {
