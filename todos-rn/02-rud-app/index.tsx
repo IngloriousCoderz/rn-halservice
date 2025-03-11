@@ -1,45 +1,67 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { FlatList, StyleSheet, Text, TextInput, View } from "react-native";
 
 import Button from "./button";
 import ListItem from "./list-item";
-import { Task } from "@/types/task";
 
-const INITIAL_TASKS: Task[] = [
+const INITIAL_TASKS = [
   { id: 1, text: "Learn React", completed: true },
   { id: 2, text: "Learn React Native", completed: false },
   { id: 3, text: "Work!" },
 ];
 
 export default function Index({ name = "User" }) {
-  const [text, setText] = useState("");
   const [tasks, setTasks] = useState(INITIAL_TASKS);
 
-  const textInput = useRef<TextInput>(null);
+  const handleAdd = () => console.log("add!");
 
-  const handleChangeText = (text: string) => setText(text);
+  const handleToggle = (id: number) => {
+    // clone
+    // setTasks((tasks) => {
+    //   const clone = [...tasks];
+    //   const index = clone.findIndex((task) => task.id === id);
+    //   const newTask = { ...clone[index] };
+    //   newTask.completed = !newTask.completed;
+    //   clone[index] = newTask;
+    //   return clone;
+    // });
 
-  const handleAdd = () => {
-    setTasks((tasks) => {
-      const maxId = tasks.length ? tasks[tasks.length - 1].id : 0;
+    // sandwich
+    // setTasks((tasks) => {
+    //   const index = tasks.findIndex((task) => task.id === id);
+    //   return [
+    //     ...tasks.slice(0, index),
+    //     { ...tasks[index], completed: !tasks[index].completed },
+    //     ...tasks.slice(index + 1),
+    //   ];
+    // });
 
-      return [...tasks, { id: maxId + 1, text, completed: false }];
-    });
-
-    setText("");
-
-    textInput.current?.focus();
-  };
-
-  const handleToggle = (id: number) =>
+    // array method
     setTasks((tasks) =>
       tasks.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
+  };
 
-  const handleDelete = (id: number) =>
+  const handleDelete = (id: number) => {
+    // clone
+    // setTasks((tasks) => {
+    //   const clone = [...tasks];
+    //   const index = clone.findIndex((task) => task.id === id);
+    //   clone.splice(index, 1);
+    //   return clone;
+    // });
+
+    // sandwich
+    // setTasks((tasks) => {
+    //   const index = tasks.findIndex((task) => task.id === id);
+    //   return [...tasks.slice(0, index), ...tasks.slice(index + 1)];
+    // });
+
+    // array method
     setTasks((tasks) => tasks.filter((task) => task.id !== id));
+  };
 
   return (
     <>
@@ -48,16 +70,7 @@ export default function Index({ name = "User" }) {
       </View>
 
       <View style={styles.form}>
-        <TextInput
-          style={styles.input}
-          value={text}
-          onChangeText={handleChangeText}
-          placeholder="What next?"
-          autoFocus
-          onSubmitEditing={handleAdd}
-          submitBehavior="submit"
-          ref={textInput}
-        />
+        <TextInput style={styles.input} />
         <Button onPress={handleAdd}>Add</Button>
       </View>
 
