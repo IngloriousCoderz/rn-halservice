@@ -1,6 +1,5 @@
 import { Task } from "@/types/task";
 import { ADD_TASK, TOGGLE_TASK, DELETE_TASK } from "./action.types";
-import { Reducer } from "@reduxjs/toolkit";
 
 type TaskActionType = typeof ADD_TASK | typeof TOGGLE_TASK | typeof DELETE_TASK;
 
@@ -35,6 +34,3 @@ function toggleTask(state: Task[], action: TaskAction) {
 function deleteTask(state: Task[], action: TaskAction) {
   return state.filter((task) => task.id !== action.payload);
 }
-
-export const selectTask = (state: Task[], id: string) =>
-  state.find((task) => task.id === id);

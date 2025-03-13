@@ -1,20 +1,22 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { TextInput } from "react-native";
 
 import FormComponent from "./form";
 import { useTasksStore } from "@/stores/tasks.store";
+import { useDispatch, useSelector } from "react-redux";
+import { selectText } from "@/store/todo-list/selectors";
+import { addTask, setText } from "@/store/todo-list/action.creators";
 
 export default function Form() {
-  const addTask = useTasksStore(({ addTask }) => addTask);
-  const [text, setText] = useState("");
+  const text = useSelector(selectText);
+  const dispatch = useDispatch();
 
   const textInput = useRef<TextInput>(null);
 
-  const handleChangeText = (text: string) => setText(text);
+  const handleChangeText = (text: string) => dispatch(setText(text));
 
   const handleSubmit = () => {
-    addTask(text);
-    setText("");
+    dispatch(addTask(text));
     textInput.current?.focus();
   };
 

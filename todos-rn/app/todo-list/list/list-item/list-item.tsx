@@ -1,19 +1,19 @@
 import { View, Text, StyleSheet } from "react-native";
+import { useDispatch } from "react-redux";
 
 import Button from "@/components/button";
 import { Task } from "@/types/task";
-import { useTasksStore } from "@/stores/tasks.store";
+import { deleteTask, toggleTask } from "@/store/todo-list/action.creators";
 
 interface Props {
   task: Task;
 }
 
 export default function ListItem({ task }: Props) {
-  const toggleTask = useTasksStore(({ toggleTask }) => toggleTask);
-  const deleteTask = useTasksStore(({ deleteTask }) => deleteTask);
+  const dispatch = useDispatch();
 
-  const handleTextPress = () => toggleTask(task.id);
-  const handleButtonPress = () => deleteTask(task.id);
+  const handleTextPress = () => dispatch(toggleTask(task.id));
+  const handleButtonPress = () => dispatch(deleteTask(task.id));
 
   return (
     <View style={styles.listItem}>

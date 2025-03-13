@@ -1,6 +1,7 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, Reducer, UnknownAction } from "@reduxjs/toolkit";
 import form from "./form.reducer";
 import tasks from "./tasks.reducer";
+import { Task } from "@/types/task";
 
 const preloadedState = {
   form: "",
@@ -11,7 +12,10 @@ const preloadedState = {
   ],
 };
 
-const store = configureStore({
-  reducer: { form, tasks },
+export const store = configureStore({
+  reducer: {
+    form: form as Reducer<string, UnknownAction, string>,
+    tasks: tasks as Reducer<Task[], UnknownAction, Task[]>,
+  },
   preloadedState,
 });

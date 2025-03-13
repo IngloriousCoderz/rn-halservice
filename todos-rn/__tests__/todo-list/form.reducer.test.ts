@@ -1,5 +1,5 @@
 import { reset, setText } from "@/store/todo-list/action.creators";
-import form, { FormAction, selectText } from "@/store/todo-list/form.reducer";
+import form, { FormAction } from "@/store/todo-list/form.reducer";
 
 describe("Form Reducer", () => {
   it("should initialize the state", () => {
@@ -39,14 +39,5 @@ describe("Form Reducer", () => {
     const state = form(stateBefore, action as FormAction);
 
     expect(state).toBe(stateBefore);
-  });
-
-  it("selects the text", () => {
-    const state = "Some text";
-    const expectedText = "Some text";
-
-    const text = selectText(state);
-
-    expect(text).toBe(expectedText);
   });
 });

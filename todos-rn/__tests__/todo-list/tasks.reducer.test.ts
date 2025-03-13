@@ -3,7 +3,7 @@ import {
   deleteTask,
   toggleTask,
 } from "@/store/todo-list/action.creators";
-import tasks, { selectTask, TaskAction } from "@/store/todo-list/tasks.reducer";
+import tasks, { TaskAction } from "@/store/todo-list/tasks.reducer";
 import { Task } from "@/types/task";
 
 describe("Tasks Reducer", () => {
@@ -82,19 +82,5 @@ describe("Tasks Reducer", () => {
     const state = tasks(stateBefore, action as TaskAction);
 
     expect(state).toBe(stateBefore);
-  });
-
-  it("selects a task given its id", () => {
-    const state = [
-      { id: "1", text: "Learn Zustand", completed: true },
-      { id: "2", text: "Learn Redux", completed: false },
-      { id: "3", text: "Learn RTK" },
-    ];
-    const id = "2";
-    const expectedTask = { id: "2", text: "Learn Redux", completed: false };
-
-    const task = selectTask(state, id);
-
-    expect(task).toStrictEqual(expectedTask);
   });
 });

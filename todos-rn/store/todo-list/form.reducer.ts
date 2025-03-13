@@ -19,12 +19,10 @@ export default function form(state = "", action: FormAction) {
   return reducer ? reducer(state, action) : state;
 }
 
-function setText(state: string, action: FormAction) {
+function setText(state: { text: string }, action: FormAction) {
   return action.payload;
 }
 
-function reset(state: string, action: FormAction) {
+function reset(state: { text: string }, action: FormAction) {
   return "";
 }
-
-export const selectText = (state: string) => state;

@@ -1,8 +1,7 @@
-import { Action } from "@/types/action";
 import { Task } from "@/types/task";
-import form, { FormAction } from "./form.reducer";
-import tasks, { TaskAction } from "./tasks.reducer";
-import { combineReducers, Reducer } from "@reduxjs/toolkit";
+import form from "./form.reducer";
+import tasks from "./tasks.reducer";
+import { combineReducers } from "@reduxjs/toolkit";
 
 export interface TodoListState {
   form: string;

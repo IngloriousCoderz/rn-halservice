@@ -1,12 +1,13 @@
 import { FlatList, StyleSheet } from "react-native";
 
 import ListItem from "./list-item";
+import { Task } from "@/types/task";
 
-import { useTasksStore } from "@/stores/tasks.store";
+interface Props {
+  tasks: Task[];
+}
 
-export default function List() {
-  const tasks = useTasksStore(({ tasks }) => tasks);
-
+export default function List({ tasks }: Props) {
   return (
     <FlatList
       data={tasks}

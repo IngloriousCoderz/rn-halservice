@@ -1,3 +1,4 @@
+import { UnknownAction } from "@reduxjs/toolkit";
 import {
   ADD_TASK,
   DELETE_TASK,
@@ -6,15 +7,24 @@ import {
   TOGGLE_TASK,
 } from "./action.types";
 
-export const setText = (text: string) => ({ type: SET_TEXT, payload: text });
+export const setText = (text: string): UnknownAction => ({
+  type: SET_TEXT,
+  payload: text,
+});
 
-export const reset = () => ({ type: RESET });
+export const reset = (): UnknownAction => ({ type: RESET });
 
-export const addTask = (text: string) => ({
+export const addTask = (text: string): UnknownAction => ({
   type: ADD_TASK,
   payload: text,
 });
 
-export const toggleTask = (id: string) => ({ type: TOGGLE_TASK, payload: id });
+export const toggleTask = (id: string): UnknownAction => ({
+  type: TOGGLE_TASK,
+  payload: id,
+});
 
-export const deleteTask = (id: string) => ({ type: DELETE_TASK, payload: id });
+export const deleteTask = (id: string): UnknownAction => ({
+  type: DELETE_TASK,
+  payload: id,
+});
