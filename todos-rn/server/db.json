@@ -16,9 +16,12 @@
       "completed": false
     },
     {
-      "id": "ccca",
-      "text": "Ciauz",
+      "id": "ecd7",
+      "text": "Ciao",
       "completed": false
     }
-  ]
+  ],
+  "profile": {
+    "accessToken": "long-hash"
+  }
 }
