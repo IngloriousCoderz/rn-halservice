@@ -1,45 +1,88 @@
-import { StyleSheet, Text, View } from "react-native";
-import Mapbox, { MarkerView } from "@rnmapbox/maps";
-import { useEffect } from "react";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Form, Field } from "react-final-form";
 
-Mapbox.setAccessToken(
-  "pk.eyJ1IjoiaWNlb25maXJlIiwiYSI6ImNtOGVtM2J3YjAzajcybXNkbm9tcjR0bDQifQ.SW2DPZyR0Ck70bdXTb_qpA"
-);
+interface Values {
+  username: string;
+  password: string;
+}
 
-const defaultCamera = {
-  centerCoordinate: [12.4596857, 41.9102302],
-  zoomLevel: 14,
-};
+interface Errors {
+  username?: string;
+  password?: string;
+}
 
 export default function Index() {
-  useEffect(() => {
-    Mapbox.setTelemetryEnabled(false);
-  }, []);
+  const handleSubmit = (values: Values) => console.log(values);
+
+  const validate = (values: Values) => {
+    const errors: Errors = {};
+
+    if (!values.username) {
+      errors.username = "Required";
+    }
+
+    if (!values.password) {
+      errors.password = "Required";
+    }
+
+    return errors;
+  };
 
   return (
-    <View style={styles.container}>
-      <Mapbox.MapView style={styles.map}>
-        <Mapbox.Camera defaultSettings={defaultCamera} />
-        <MarkerView coordinate={[12.4596857, 41.9102302]}>
-          <Text style={styles.marker}>Home</Text>
-        </MarkerView>
-      </Mapbox.MapView>
-    </View>
+    <Form
+      onSubmit={handleSubmit}
+      validate={validate}
+      render={({ handleSubmit }) => (
+        <View style={styles.form}>
+          <Text style={styles.title}>Login</Text>
+          <Field name="username">
+            {({ input, meta }) => (
+              <>
+                <TextInput
+                  placeholder="Username"
+                  style={styles.input}
+                  {...input}
+                />
+                {meta.touched && <Text style={styles.error}>{meta.error}</Text>}
+              </>
+            )}
+          </Field>
+          <Field name="password">
+            {({ input, meta }) => (
+              <>
+                <TextInput
+                  secureTextEntry={true}
+                  placeholder="Password"
+                  style={styles.input}
+                  {...input}
+                />
+                {meta.touched && <Text style={styles.error}>{meta.error}</Text>}
+              </>
+            )}
+          </Field>
+          <Button title="Login" onPress={handleSubmit} />
+        </View>
+      )}
+    />
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  form: {
+    margin: 16,
+    gap: 16,
   },
-  map: {
-    height: "100%",
-    width: "100%",
+
+  title: {
+    fontSize: 32,
+    fontWeight: "bold",
+    textAlign: "center",
   },
-  marker: {
-    color: "white",
-    backgroundColor: "cornflowerblue",
-    padding: 8,
-    borderRadius: 8,
+  input: {
+    borderBottomWidth: 1,
+    borderBottomColor: "grey",
+  },
+  error: {
+    color: "red",
   },
 });
