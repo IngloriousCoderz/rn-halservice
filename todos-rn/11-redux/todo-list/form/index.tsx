@@ -3,8 +3,8 @@ import { TextInput } from "react-native";
 
 import FormComponent from "./form";
 import { useDispatch, useSelector } from "react-redux";
-import { setText, selectText } from "@/store/todo-list-slices/form.slice";
-import { addTask } from "@/store/todo-list-slices/action.creators";
+import { selectText } from "@/store/todo-list-rtk/selectors";
+import { addTask, setText } from "@/store/todo-list-rtk/action.creators";
 
 export default function Form() {
   const text = useSelector(selectText);
