@@ -1,13 +1,45 @@
-import { Provider } from "react-redux";
+import { StyleSheet, Text, View } from "react-native";
+import Mapbox, { MarkerView } from "@rnmapbox/maps";
+import { useEffect } from "react";
 
-import App from "./app";
+Mapbox.setAccessToken(
+  "pk.eyJ1IjoiaWNlb25maXJlIiwiYSI6ImNtOGVtM2J3YjAzajcybXNkbm9tcjR0bDQifQ.SW2DPZyR0Ck70bdXTb_qpA"
+);
 
-import { store } from "@/store/todo-list-thunks";
+const defaultCamera = {
+  centerCoordinate: [12.4596857, 41.9102302],
+  zoomLevel: 14,
+};
 
-export default function Index({ name = "User" }) {
+export default function Index() {
+  useEffect(() => {
+    Mapbox.setTelemetryEnabled(false);
+  }, []);
+
   return (
-    <Provider store={store}>
-      <App name={name} />
-    </Provider>
+    <View style={styles.container}>
+      <Mapbox.MapView style={styles.map}>
+        <Mapbox.Camera defaultSettings={defaultCamera} />
+        <MarkerView coordinate={[12.4596857, 41.9102302]}>
+          <Text style={styles.marker}>Home</Text>
+        </MarkerView>
+      </Mapbox.MapView>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  map: {
+    height: "100%",
+    width: "100%",
+  },
+  marker: {
+    color: "white",
+    backgroundColor: "cornflowerblue",
+    padding: 8,
+    borderRadius: 8,
+  },
+});
