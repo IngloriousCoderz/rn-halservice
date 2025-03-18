@@ -1,12 +1,13 @@
-import { Link } from "expo-router";
-import { Text, View } from "react-native";
+import { Provider } from "react-redux";
 
-export default function Index() {
+import App from "./app";
+
+import { store } from "@/store/todo-list-thunks";
+
+export default function Index({ name = "User" }) {
   return (
-    <View>
-      <Text>Hello world!</Text>
-      <Link href="/login">Login</Link>
-      <Link href="/todo-list">Todo List</Link>
-    </View>
+    <Provider store={store}>
+      <App name={name} />
+    </Provider>
   );
 }
